@@ -64,8 +64,6 @@ menu:
     items:
     - name: parcpp
       label: Parallel C++
-    - name: tbb
-      label: TBB
     - name: cuda
       label: CUDA
     - name: mpi
