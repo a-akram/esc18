@@ -98,18 +98,29 @@ for (auto& t : v) {
 
 ### Numerical Integration
 ~~~
-constexpr int num_steps = 1<<20;
-double pi = 0.;
-constexpr double step = 1.0/(double) num_steps;
-double sum = 0.;
+#include <iostream>
+#include <iomanip>
+#include <chrono>
 
-for (int i=0; i< num_steps; i++){
-  auto x = (i+0.5)*step;
-  sum = sum + 4.0/(1.0+x*x);
+int main()
+{
+  double sum = 0.;
+  constexpr unsigned int num_steps = 1 << 22;
+  double pi = 0.0;
+  constexpr double step = 1.0/(double) num_steps;
+  auto start = std::chrono::system_clock::now();
+  for (int i=0; i< num_steps; i++){
+    auto  x = (i+0.5)/num_steps;
+    sum = sum + 4.0/(1.0+x*x);
+  }
+  auto stop = std::chrono::system_clock::now();
+  std::chrono::duration<double> dur= stop - start;
+  std::cout << dur.count() << " seconds" << std::endl;
+  pi = step * sum;
+
+  std::cout << "result: " <<  std::setprecision (15) << pi << std::endl;
 }
-pi = step * sum;
 
-std::cout << "result: " <<  std::setprecision (15) << pi << std::endl;
 ~~~
 
 
