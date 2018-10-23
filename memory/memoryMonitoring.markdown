@@ -1,5 +1,5 @@
 ---
-title: A look to your Hardware
+title: Simple Memory Monitoring
 layout: main
 category: memory
 ---
