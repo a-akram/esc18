@@ -4,7 +4,7 @@ layout: main
 section: floatingpoint
 ---
 
-In this exercises you will familiarize with basic proprerties of floating point represantation
+In this exercises you will familiarize with basic properties of floating point represantation
 
 1. count the number of floating points between two of them
 2. extract the exponent of a float

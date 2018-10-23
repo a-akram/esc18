@@ -1,7 +1,7 @@
 ---
-title: Efficient C++
+title: Parallelism
 layout: main
-section: cpp
+section: parallelism
 ---
 
 {% include section_toc.html %}

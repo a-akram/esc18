@@ -29,7 +29,7 @@ One can choose a set of events and list them on the command line as in
 
 For large applications more details can be obtained running ``perf record``  that will produce a file containing all sampled events and their location in the application.
 ``perf record  --call-graph=dwarf`` will produce a full call-graph. On more recent Intel hardware (since Haswell)
-one can use ``perf record  --call-graph=lbr`` which is faster and produce a more compact report.
+one can use ``perf record  --call-graph=lbr`` which is faster and produces a more compact report.
 ``perf report`` can be used to display the detailed profile
 
 a wrapper defining more user-friedly name for INTEL counters can be downloaded

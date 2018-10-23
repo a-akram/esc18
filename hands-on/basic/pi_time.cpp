@@ -28,9 +28,9 @@ int main(int argc, char* argv[])
 {
   int const n = (argc > 1) ? std::atoi(argv[1]) : 10;
 
-  auto const p = pi(n);
+  auto const [value, time] = pi(n);
 
-  std::cout << "pi = " << p.first
+  std::cout << "pi = " << value
             << " for " << n << " iterations"
-            << " in " << p.second.count() << " s\n";
+            << " in " << time.count() << " s\n";
 }

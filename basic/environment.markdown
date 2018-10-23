@@ -10,8 +10,10 @@ school exercises.
 If something doesn't work as expected, please ask one of the
 organizers.
 
-When using these computing resources you agree to comply with the [INFN
-computing rules](http://www.ac.infn.it/accesso_risorse_informatiche/en_regulations.pdf).
+When using these computing resources you agree to comply with the "Acceptable
+Use Policy" of INFN-CNAF, available
+in [Italian](https://www.cnaf.infn.it/wp-content/uploads/2016/10/AUP_it.pdf)
+and [English](https://www.cnaf.infn.it/wp-content/uploads/2016/10/AUP_en.pdf)
 
 ## Wi-Fi access
 
@@ -22,170 +24,123 @@ will allow to connect to the ESC computers.
 ## SSH access to school computers
 
 You have been assigned a personal account, with a username of the form
-studentNM, where NM is a number between 01 and 30. In the following,
-when you see studentNM, replace it with your personal account. You
+`studentNM`, where `NM` is a number between 01 and 20. In the following,
+when you see `student`, replace it with your personal account. You
 should also have received the corresponding password.
 
-Similarly you have been assigned a computer, named esc-XY, where XY is
-a number between 01 and 60. In the following, when you see esc-XY,
-replace it with the name of the host assigned to you.
+To log on the computers prepared for the School, you have to go first through a
+gateway, named `bastion.cnaf.infn.it`, with the username and password of
+`student`.
 
-Another machine, named urania, is available for the exercises
-involving the use of GPUs. urania is shared among all the students.
-
-To log on esc-XY and urania you have to first log into a gateway
-server, named esc-gw.pd.infn.it, with the username and password of
-studentNM.
-
-	[me@mylaptop ~]$ ssh -X studentNM@esc-gw.pd.infn.it
-	studentNM@esc-gw.pd.infn.it's password:
+	[me@mylaptop ~]$ ssh -XA student@bastion.cnaf.infn.it
+	student@bastion.cnaf.infn.it's password:
 	Last login: ...
-	[studentNM@esc-gw ~]$
+	[student@bastion ~]$
 
-The `-X` option forwards the X11 display.
+The `-X` option forwards the X11 display. The `-A` option forwards the SSH agent.
 
-From esc-gw you can log into esc-XY and urania in a password-less way,
-thanks to an SSH key already generated for you and available in the
-`.ssh` directory (files `id_rsa` and `id_rsa.pub`).
+From `bastion` you can then log onto the School computer assigned to you. The computer is named
+`hpc-200-06-0X.cr.cnaf.infn.it`, where `X` is a number between 5 and 8. The name
+is awful, we know, but you can get around it by creating a config file for ssh on
+the `bastion` host:
 
-	[studentNM@esc-gw ~]$ ssh esc-XY
+	[student@bastion ~]$ cat .ssh/config
+    ForwardX11 yes
+    ForwardAgent yes
+
+    Host esc
+    Hostname hpc-200-06-0X.cr.cnaf.infn.it
+    [student@bastion ~]$ ssh esc
+    student@hcp-200-06-0X.cr.cnaf.infn.it's password:
+    Last login: ...
+	[student@hcp-200-06-0X ~]$
+
+Remember to replace the `X` with the number assigned to you.
+
+In the following, when you see `esc`, it means the name of the machine assigned to you.
+
+To simplify the login from `bastion` to `esc`, you may create an SSH key on `bastion` and register it on `esc`:
+
+	[student@bastion ~]$ ssh-keygen
+    Generating public/private rsa key pair.
+    Enter file in which to save the key (/home/HPC/student/.ssh/id_rsa):
+    Enter passphrase (empty for no passphrase):
+    Enter same passphrase again:
+    ...
+	[student@bastion ~]$ ssh-copy-id esc
+    ...
+    [student@bastion ~]$ ssh esc
 	Last login: ...
-
-	                 Welcome to ESC18
-
-	 Exercises Material: http://infn-esc.github.io/esc18
-	[studentNM@esc-XY ~]$
-
-If you want you can do it in one step.
-
-    [me@mylaptop ~]$ ssh -tX studentNM@esc-gw.pd.infn.it ssh esc-XY
-	studentNM@esc-gw.pd.infn.it's password:
-	Last login: ...
-
-	                 Welcome to ESC18
-
-	 Exercises Material: http://infn-esc.github.io/esc18
-	[studentNM@esc-XY ~]$
-
-Similarly for urania.
+	[student@hpc-200-06-0X ~]$
 
 Your shell is [`bash`](http://www.gnu.org/s/bash).
 
-Your home directory is shared between esc-gw, esc-XY and urania, but
-please use esc-gw exclusively as a bridge to log into esc-XY and
-urania.
-
-<div class="alert alert-danger" role="alert">
-<strong>IMPORTANT NOTE:</strong> The student computers will be uninstalled on Friday
-evening and all data on them will be destroyed. Please make sure you make
-a copy of everything valuable by the end of the Friday session!
-</div>
+Please note that:
+* the `bastion` host is useful and needed only as a gateway to `esc`
+* each `esc` computer is not assigned exclusively to a student
+* the home directory is shared between all `esc` computers, but not with `bastion`
+* your home directory will be wiped out and your `student` account will be
+  disabled soon after the end of the School. Please make sure to save somewhere
+  else what you want to keep.
 
 ## School material
 
 All the school material is included in a git repository. Get it using:
 
-    [studentNM@esc-XY ~]$ git clone https://github.com/infn-esc/esc18.git
+    [student@esc ~]$ git clone https://github.com/infn-esc/esc18.git
 
 ## Testing the environment
 
-1. Log into esc-XY.
+1. Log into `esc`.
 
-2. Check the following commands and the respective outputs.
+1. Enable the right toolsets
 
-		[studentNM@esc-XY ~]$ c++ -dumpversion
-		7.2.0
-		[studentNM@esc-XY ~]$ valgrind --version
-		valgrind-3.12.0
-		[studentNM@esc-XY ~]$ clang-format --version
-		clang-format version 5.0.0 (tags/RELEASE_500/final)
-		[studentNM@esc-XY ~]$ clang-tidy --version
-		LLVM (http://llvm.org/):
-		LLVM version 5.0.0
-		Optimized build.
-		Default target: x86_64-unknown-linux-gnu
-		Host CPU: nehalem
-		[studentNM@esc-XY ~]$ perf --version
-		perf version 3.10.0-693.2.2.el7.x86_64.debug
+       [student@esc ~]$ scl enable devtoolset-7 llvm-toolset-7 bash
+
+1. Check the following commands and the respective outputs.
+
+       [student@esc ~]$ gcc --version
+       gcc (GCC) 7.3.1 20180303 (Red Hat 7.3.1-5)
+       ...
+       [student@esc ~]$ clang --version
+       clang version 5.0.1 (tags/RELEASE_501/final)
+       ...
+       [student@esc ~]$ valgrind --version
+       valgrind-3.13.0
+       [student@esc ~]$ perf --version
+       perf version 3.10.0-693.21.1.el7.x86_64.debug
 
 ## Editing source code
 
 ### Editing locally
 
-On esc-XY you can find several editors available, such as vim, emacs,
-gedit, nano. If the X display is available, graphical editors
-will open a window on your laptop; the network latency however may not
-be good enough to give you a fine experience.
+On `esc` you can find several editors available, such as vim, emacs, nano. If
+the X display is available, graphical editors will open a window on your laptop;
+the network latency however may not be good enough to give you a fine
+experience. Just try.
 
 ### Editing remotely
 
-Alternatively you could edit the source code for the exercises on your
-laptop, synchronizing the files with the ESC machines. Some options
-are presented below.
+Alternatively you could edit the source code for the exercises on your laptop,
+synchronizing the files with the `esc` machine, for example using one of the
+following:
 
-First of all you should simplify your use of SSH to connect to ESC
-resources.
+* `scp`: You can copy files remotely using `scp`, in both directions.
 
-If you run Linux, you could for example copy the SSH credentials
-available on esc-gw onto your laptop and configure SSH to use them
-when logging into esc-gw.
+* `sshfs`: You can mount your `esc` home directory on your laptop via `sshfs`.
 
-	[me@mylaptop ~]$ mkdir esc_ssh
-	[me@mylaptop ~]$ scp studentNM@esc-gw.pd.infn.it:.ssh/id_rsa esc_ssh
-	[me@mylaptop ~]$ scp studentNM@esc-gw.pd.infn.it:.ssh/id_rsa.pub esc_ssh
-	[me@mylaptop ~]$ chmod 600 esc_ssh/id_rsa
-	[me@mylaptop ~]$ cat >> .ssh/config <<EOF
-	>
-	> Host esc-gw
-	> HostName esc-gw.pd.infn.it
-	> User studentNM
-	> IdentityFile ~/esc_ssh/id_rsa
-	> ForwardX11 yes
-	> EOF
-	[me@mylaptop ~]$ ssh esc-gw
-	Last login: ...
-	[studentNM@esc-gw ~]$
+* `rsync`: You can synchronize your local workspace with the one you keep on `esc`
+  using [`rsync`](http://rsync.samba.org/). Please refer to the `rsync` manual to
+  fully understand the meaning of the different options, so to avoid mistakes
+  that could cause loss of data.
 
-### Using scp
+For this to work seamlessly, however, you should first simplify your use of SSH
+to connect to `esc`, namely:
 
-You can copy files remotely using scp, in both directions.
+* enable the use of SSH keys in place of password authentication also from your
+  laptop to `bastion`
+* enable an SSH tunnel on `bastion` in order to be able to connect directly from
+  your laptop to `esc`
 
-	[me@mylaptop ~]$ scp exercise.cc @esc-gw:
-	[me@mylaptop ~]$ scp @esc-gw:exercise2.cc .
-
-### Using sshfs
-
-You can mount your ESC home directory on your laptop via sshfs.
-
-	[me@mylaptop ~]$ mkdir esc_workspace
-	[me@mylaptop ~]$ sshfs esc-gw: esc_workspace
-	[me@mylaptop ~]$ vi esc_workspace/exercise.cc
-	[me@mylaptop ~]$ ssh esc-gw ls
-	exercise.cc
-
-To unmount use `fusermount -u ~/esc_workspace`.
-
-### Using rsync
-
-You can synchronize your local workspace with the one you keep on the
-ESC system using [rsync](http://rsync.samba.org/). The synchronization
-can work in both directions, so you can use it for example to save all
-your work on your laptop at the end of the week.
-
-To synchronize the remote workspace on the ESC system with your
-locally-modified one you can do:
-
-	[me@mylaptop ~]$ mkdir esc_workspace
-	[me@mylaptop ~]$ vi esc_workspace/exercise.cc
-	[me@mylaptop ~]$ rsync -av -e ssh esc_workspace esc-gw:
-	[me@mylaptop ~]$ ssh esc-gw ls esc_workspace/exercise.cc
-	esc_workspace/exercise.cc
-
-Similarly, if you make modifications to the remote ESC workspace you
-can synchronize your local one:
-
-    [me@mylaptop ~]$ rsync -av -e ssh esc-gw:esc_workspace esc_workspace
-
-Please refer to the rsync manual to fully understand the meaning of
-the different options, so to avoid mistakes that could cause loss of
-data.
+The setup is not overly difficult, but it's not trivial either, so we suggest
+this approach only if you are familiar with the SSH mechanisms.

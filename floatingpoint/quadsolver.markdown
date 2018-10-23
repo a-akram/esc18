@@ -36,9 +36,9 @@ In this exercises you will experiment catastrofic cancellations and verify the a
         }
         
 
-2. compute radius and center for a circle given chord and sagita (simplify orientation as in the slides so y0=0)
-3. use standard circle equation to recompute the value of `xt`. See for which value of the sagita the equation _breaks-down_
-4. use above solutions to recompute the value of `xt` using the "local" circle equation. See for which value of the sagita the equation _breaks-down_
+2. compute radius and center for a circle given chord and sagitta (simplify orientation as in the slides so y0=0)
+3. use standard circle equation to recompute the value of `xt`. See for which value of the sagitta the equation _breaks-down_
+4. use above solutions to recompute the value of `xt` using the "local" circle equation. See for which value of the sagitta the equation _breaks-down_
 
         #include<iostream>
         #include<iomanip>
@@ -61,7 +61,7 @@ In this exercises you will experiment catastrofic cancellations and verify the a
           T xt = std::sqrt(T(77.));
           std::cout << "xt "; print(xt);
  
-          auto sagita = T(10.);  // make it smaller and smaller...
+          auto sagitta = T(10.);  // make it smaller and smaller...
           auto yt=halfChord;
           // compute xm, radius and x0
 	  

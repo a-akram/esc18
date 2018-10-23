@@ -33,7 +33,7 @@ For a full discussion of the optimization techniques that can be used in the sol
 look at the [paper by Colfax](Colfax_Optimization_Techniques_2_of_3.pdf)
 
 
-Bonus: add thread parallelization with OpenMP
+Bonus: add thread parallelization with TBB
 
 
 More Bonuses:

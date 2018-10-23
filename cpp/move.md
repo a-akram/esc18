@@ -4,29 +4,21 @@ layout: main
 category: cpp
 ---
 
-The goal of this exercise is to get some confidence with move
-semantics, in particular to implement the move operations of a class:
-the move constructor and the move assignment.
+The goal of this exercise is to appreciate the performance effect of move
+semantics and we'll do in the context of returning a value from a function.
 
-Open the test program
-[`string.cpp`]({{site.exercises_repo}}/hands-on/cpp/string.cpp)
-and complete the existing code to:
+Open the program [`move.cpp`]({{site.exercises_repo}}/hands-on/cpp/move.cpp). It
+contains a slight variation of the `make_vector` function introduced in one of
+the previous exercises.
 
-* Complete the set of the special member functions so that String is
-  copyable and movable
+Measure the time it takes to execute it applying the following variations:
 
-* Add `operator[]` (const and non-const) to access a character at a
-  given position
+* the result is returned from the function
 
-* Add a `c_str()` member function to access the underlying C-style
-  string
+* the result is passed to the function as an output parameter (by reference or
+  by pointer)
 
-* Use a smart pointer instead of a raw pointer. Note that
-  `std::unique/shared_ptr` and corresponding `make_unique/shared`
-  support arrays
+* the result is returned from the function, but the Return Value Optimization is
+  disabled (how?)
 
-The commands to build and run the code are:
-
-    [studentNM@esc-XY ~]$ cd esc18/hands-on/cpp
-    [studentNM@esc-XY cpp]$ g++ -o string string.cpp
-    [studentNM@esc-XY cpp]$ ./string
+Is there any difference?

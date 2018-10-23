@@ -4,16 +4,17 @@ category: basic
 layout: main
 ---
 
-The goal of this exercise is to learn how to use `clang-format` to format your
-code automatically and uniformly.
+The goal of this exercise is to learn how to
+use [`clang-format`](https://clang.llvm.org/docs/ClangFormatStyleOptions.html)
+to format your code automatically and uniformly.
 
-Consider [hello.cc]({{site.exercises_repo}}/hands-on/basic/hello.cc):
+Consider [hello.cpp]({{site.exercises_repo}}/hands-on/basic/hello.cpp):
 
-    [studentNM@esc-XY ~]$ cd esc18/hands-on/basic
-    [studentNM@esc-XY basic]$ cat hello.cc
+    [student@esc ~]$ cd esc18/hands-on/basic
+    [student@esc basic]$ cat hello.cpp
     #include <iostream>
     int main(int argc, char*argv[]){std::cout<<"Hello, ";...
-    [studentNM@esc-XY basic]$ clang-format hello.cc
+    [student@esc basic]$ clang-format hello.cpp
     #include <iostream>
     int main(int argc, char *argv[]) {
       std::cout << "Hello, ";
@@ -21,10 +22,12 @@ Consider [hello.cc]({{site.exercises_repo}}/hands-on/basic/hello.cc):
         std::cout << argv[1];
     ...
 
-Note how the `*` in `char *argv` is attached to the argument. Instead we want it
-attached to the type as in `char* argv`.
+Not perfect, but not bad either.
 
-    [studentNM@esc-XY basic]$ clang-format -style="{PointerAlignment: Left}" hello.cc
+Note in particular how the `*` in `char *argv` is attached to the argument.
+Instead we want it attached to the type as in `char* argv`.
+
+    [student@esc basic]$ clang-format -style="{PointerAlignment: Left}" hello.cpp
     #include <iostream>
     int main(int argc, char* argv[]) {
       std::cout << "Hello, ";
@@ -35,8 +38,8 @@ attached to the type as in `char* argv`.
 Much better. We can save our settings in a configuration file, starting from a
 dump of the default settings.
 
-    [studentNM@esc-XY basic]$ clang-format -dump-config -style="{PointerAlignment: Left}" > .clang-format
-    [studentNM@esc-XY basic]$ clang-format hello.cc
+    [student@esc basic]$ clang-format -dump-config -style="{PointerAlignment: Left}" > .clang-format
+    [student@esc basic]$ clang-format hello.cpp
     #include <iostream>
     int main(int argc, char* argv[]) {
       std::cout << "Hello, ";
@@ -50,8 +53,8 @@ ${HOME}.
 
 To format a file _in place_ use the `-i` option.
 
-    [studentNM@esc-XY basic]$ clang-format -i hello.cc
-    [studentNM@esc-XY basic]$ cat hello.cc
+    [student@esc basic]$ clang-format -i hello.cc
+    [student@esc basic]$ cat hello.cc
     #include <iostream>
     int main(int argc, char* argv[]) {
       std::cout << "Hello, ";

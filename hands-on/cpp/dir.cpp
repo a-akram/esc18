@@ -23,7 +23,15 @@ std::vector<std::string> entries(/* add the right arguments here */)
 {
   std::vector<std::string> result;
 
-  // // dir has type DIR*
+  // relevant function and data structure are:
+  //
+  // int  readdir_r(DIR* dirp, struct dirent* entry, struct dirent** result);
+  //
+  // struct dirent {
+  //   // ...
+  //   char d_name[256];
+  // };
+  //
   // dirent entry;
   // for (auto* r = &entry; readdir_r(dir, &entry, &r) == 0 && r; ) {
   //   // `here entry.d_name` is the name of this entry
@@ -38,16 +46,9 @@ int main(int argc, char* argv[])
 
   // create a smart pointer to a DIR here, with a deleter
   // relevant functions and data structures are
-  // DIR *opendir(const char *name);
-  // int closedir(DIR *dirp);
-  // int readdir_r(DIR *dirp, struct dirent *entry, struct dirent **result);
-  // 
-  // struct dirent {
-  //   // ...
-  //   char d_name[256];
-  // };
+  // DIR* opendir(const char* name);
+  // int  closedir(DIR* dirp);
 
-  auto v = entries(/* add the right argument here */);
+  std::vector<std::string> v = entries(/* add the right argument here */);
   std::cout << v << '\n';
 }
-

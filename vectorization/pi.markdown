@@ -6,14 +6,14 @@ section: vectorization
 
 In this exercises you will vectorize the computation of pi using the arc integral
 
-1. start from the code used in the OpenMP course or from http://goo.gl/zI3WqS or use the code below
+1. start from http://goo.gl/zI3WqS or use the code below
 
         #include <limits>
         #include <algorithm>
         #include <type_traits>
         #include <cstring>
         #include <x86intrin.h>
-        
+
         template<typename Float>
         float pi(int num_steps) {
           if(num_steps <=0) __builtin_unreachable();
@@ -26,10 +26,10 @@ In this exercises you will vectorize the computation of pi using the arc integra
           }
           return step * sum;
         }
-        
+
         #include<iostream>
         #include <chrono>
-        
+
         template<typename T>
         void go(int num_steps) {
           auto start = std::chrono::high_resolution_clock::now();
@@ -37,17 +37,17 @@ In this exercises you will vectorize the computation of pi using the arc integra
           auto total_time = std::chrono::high_resolution_clock::now() -start;
           std::cout << "pi = " << res << " in " << total_time.count() << std::endl;
         }
-        
+
         int main ()
         {
 
           auto total_time = std::chrono::high_resolution_clock::duration{};
-  
+
           constexpr int num_steps = 1000000;
-          
+
           go<float>(num_steps);
           go<double>(num_steps);
-        
+
           return 0;
         }
 

@@ -20,7 +20,7 @@ and can perform operations such as "compute the sum/average.." over some feature
 (find the total charge/mass, the baricenter etc)
 
 Only the total number of elements is given (elements numbered from 0 to N-1).
-The assumption is that the groups shall be discovered in the exercise even if the "grouping" algorithm is left undefined and is FAKED by some simple assignement.
+The assumption is that the groups shall be discovered in the exercise even if the "grouping" algorithm is left undefined and is FAKED by some simple assignment.
 
 There is an assumption that the algorithm is in two steps: first it find protoGroups and then it spits (some of them) in two
 

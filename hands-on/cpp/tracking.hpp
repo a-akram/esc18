@@ -1,33 +1,16 @@
-#include <iostream>
+#ifndef TRACKING_HPP
+#define TRACKING_HPP
+
+#include <cstdio>
 
 struct Tracking
 {
-  Tracking()
-  {
-    std::cout << __PRETTY_FUNCTION__ << '\n';
-  }
-  Tracking(Tracking const&)
-  {
-    std::cout << __PRETTY_FUNCTION__ << '\n';
-  }
-  Tracking& operator=(Tracking const&)
-  {
-    std::cout << __PRETTY_FUNCTION__ << '\n';
-    return *this;
-  }
-  Tracking(Tracking&&)
-  {
-    std::cout << __PRETTY_FUNCTION__ << '\n';
-  }
-  Tracking& operator=(Tracking&&)
-  {
-    std::cout << __PRETTY_FUNCTION__ << '\n';
-    return *this;
-  }
-  ~Tracking()
-  {
-    std::cout << __PRETTY_FUNCTION__ << '\n';
-  }
-
-  int k = 0;
+  Tracking() { std::puts(__PRETTY_FUNCTION__); }
+  Tracking(Tracking const&) { std::puts(__PRETTY_FUNCTION__); }
+  Tracking& operator=(Tracking const&) { std::puts(__PRETTY_FUNCTION__); return *this; }
+  Tracking(Tracking&&) { std::puts(__PRETTY_FUNCTION__); }
+  Tracking& operator=(Tracking&&) { std::puts(__PRETTY_FUNCTION__); return *this; }
+  ~Tracking() { std::puts(__PRETTY_FUNCTION__); }
 };
+
+#endif

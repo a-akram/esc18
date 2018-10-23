@@ -8,7 +8,7 @@ To know which is the architecture of the machine you are logged in use
 {% highlight bash %}lscpu{% endhighlight %}
 googling for the Model Name will provide more detail.
 
-More details about the NUMA seup can be obtained with {% highlight bash %}numactl -H{% endhighlight %}
+More details about the NUMA setup can be obtained with {% highlight bash %}numactl -H{% endhighlight %}
 
 to kwow which architecture the compiler believe to be the ``native`` one use
 {% highlight bash %}

@@ -13,8 +13,6 @@ menu:
       label: Compiling
     - name: formatting
       label: Formatting
-    - name: valgrind
-      label: Valgrind
   - name: architecture
     label: ARCHITECTURE
     items:
@@ -39,17 +37,11 @@ menu:
     - name: issues
       label: Memory issues
     - name: pointers
-      label: Smart pointers
+      label: Managing resources
     - name: move
       label: Move
-    - name: layout
-      label: Data layout
-    - name: vector_vs_list
-      label: vector vs list
-    - name: contract
-      label: Contracts
-    - name: tidy
-      label: Static analysis
+    - name: containers
+      label: Containers
 
   -
     name: floatingpoint
@@ -67,6 +59,15 @@ menu:
       label: Vectorize computation of pi
     - name: binning
       label: Vectorize the filling of an histogram
+  - name: parallelism
+    label: PARALLELISM
+    items:
+    - name: parcpp
+      label: Parallel C++
+    - name: cuda
+      label: CUDA
+    - name: mpi
+      label: MPI
 
 defaults:
   -
