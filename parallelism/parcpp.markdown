@@ -47,7 +47,42 @@ auto stop = std::chrono::system_clock::now();
 std::chrono::duration<double> dur= stop - start;
 std::cout << dur.count() << " seconds" << std::endl;
 ~~~
+### Reduction
 
+~~~
+#include <iostream>
+#include <random>
+#include <utility>
+#include <vector>
+#include <chrono>
+
+int main(){
+
+  constexpr unsigned int numElements= 100000000;   
+
+  std::vector<int> input;
+  input.reserve(numElements);
+
+  std::mt19937 engine;
+  std::uniform_int_distribution<> uniformDist(-5,5);
+  for ( unsigned int i=0 ; i< numElements ; ++i) input.emplace_back(uniformDist(engine));
+
+  long long int sum= 0;
+
+  auto f= [&](unsigned long long firstIndex, unsigned long long lastIndex){
+    for (auto it= firstIndex; it < lastIndex; ++it){
+        sum+= input[it];
+    }
+  };
+
+  auto start = std::chrono::system_clock::now();
+  f(0,numElements);
+  std::chrono::duration<double> dur= std::chrono::system_clock::now() - start;
+  std::cout << "Time spent in reduction: " << dur.count() << " seconds" << std::endl;
+  std::cout << "Sum result: " << sum << std::endl;
+  return 0;
+}
+~~~
 
 ### Quickly create threads
 ~~~
