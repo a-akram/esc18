@@ -24,9 +24,8 @@ Cuda compilation tools, release 10.0, V10.0.130
 
 Compile and run the `deviceQuery` application:
 ~~~
-$ cd utils/deviceQuery/
-$ make
-$ ./deviceQuery
+$ module load compilers/gcc-7.3.0_sl7 compilers/cuda-10.0
+$ /home/HPC/fpantaleohpc/samples/1_Utilities/deviceQuery
 ~~~
 
 You can get some useful information about the features and the limits that you will find on the device you will be running your code on. For example:
