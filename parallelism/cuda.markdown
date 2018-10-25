@@ -160,5 +160,31 @@ cudaEventSynchronize(stop);
 cudaEventElapsedTime(&time, start, stop);
 std::cout << "Time for the kernel: " << time << " ms" << std::endl;
 ~~~
+
+
+
+### Atomics <a href="https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html#atomic-functions" target="_blank">[1]</a>
+
+An atomic function performs a read-modify-write atomic operation on one 32-bit or 64-bit word residing in global or shared memory.
+The operation is atomic in the sense that it is guaranteed to be performed without interference from other threads.
+
+
+~~~
+int atomicAdd(int* address, int val);
+unsigned int atomicAdd(unsigned int* address,
+                       unsigned int val);
+unsigned long long int atomicAdd(unsigned long long int* address,
+                                 unsigned long long int val);
+float atomicAdd(float* address, float val);
+double atomicAdd(double* address, double val);
+__half2 atomicAdd(__half2 *address, __half2 val);
+__half atomicAdd(__half *address, __half val);
+~~~
+
+reads the 16-bit, 32-bit or 64-bit word old located at the address address in global or shared memory, computes (old + val), and stores the result back to memory at the same address. These three operations are performed in one atomic transaction. The function returns old.
+
+
 ### Useful links
+
+
 <a href="http://docs.nvidia.com/cuda/cuda-runtime-api/index.html" target="_blank">http://docs.nvidia.com/cuda/cuda-runtime-api/index.html</a>
